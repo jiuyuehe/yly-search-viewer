@@ -93,3 +93,67 @@ export const themes: Record<'light' | 'dark', ViewerTheme> = {
     shadow: 'rgba(255, 255, 255, 0.1)'
   }
 }
+
+// Custom Extract Types
+export interface ExtractFieldSchema {
+  id: string
+  name: string
+  label: string
+  type: 'text' | 'number' | 'date' | 'select' | 'textarea' | 'boolean'
+  required?: boolean
+  options?: string[] // for select type
+  description?: string
+  defaultValue?: any
+}
+
+export interface ExtractTemplate {
+  id: string
+  name: string
+  description?: string
+  category?: string
+  fields: ExtractFieldSchema[]
+  createdAt: Date
+  updatedAt: Date
+  createdBy?: string
+  isActive: boolean
+}
+
+export interface ExtractResult {
+  id: string
+  templateId: string
+  templateName: string
+  fileId: string
+  fileName: string
+  fileUrl: string
+  extractedData: Record<string, any>
+  confidence?: number
+  status: 'pending' | 'completed' | 'failed' | 'reviewing'
+  createdAt: Date
+  updatedAt: Date
+  error?: string
+}
+
+export interface ExtractHistory {
+  results: ExtractResult[]
+  total: number
+  page: number
+  pageSize: number
+}
+
+// AI Service Interfaces
+export interface AIService {
+  generateSummary(docId: string): AsyncGenerator<string>
+  extractTags(docId: string): AsyncGenerator<string[]>
+  extractEntities(docId: string): AsyncGenerator<Entity[]>
+  customExtract(docId: string, template: ExtractTemplate): AsyncGenerator<any>
+  translateText(text: string, target: string): AsyncGenerator<string>
+  chatWithDocument(docId: string, question: string): AsyncGenerator<string>
+}
+
+export interface Entity {
+  text: string
+  label: string
+  start: number
+  end: number
+  confidence: number
+}

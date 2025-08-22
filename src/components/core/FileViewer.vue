@@ -91,7 +91,7 @@
 import { computed, ref, watch, onMounted, defineAsyncComponent } from 'vue'
 import { ElSkeleton, ElSkeletonItem, ElResult, ElButton, ElIcon, ElTag, ElButtonGroup, ElTooltip } from 'element-plus'
 import { Refresh, ZoomOut, ZoomIn, Download } from '@element-plus/icons-vue'
-import type { FileObject, FileViewerConfig, PreviewerEmits } from '../types'
+import type { FileObject, FileViewerConfig, PreviewerEmits } from '../../types'
 import { validateFileObject } from '../../utils/file'
 import { themes } from '../../types'
 
@@ -151,7 +151,7 @@ const currentTheme = computed(() => {
 })
 
 const themeVars = computed(() => {
-  const theme = themes[currentTheme.value]
+  const theme = themes[currentTheme.value as 'light' | 'dark']
   return {
     '--file-viewer-primary': theme.primary,
     '--file-viewer-background': theme.background,
@@ -188,8 +188,8 @@ const previewComponent = computed(() => {
 })
 
 // Methods
-function getFileTypeTagType(type: string) {
-  const typeMap: Record<string, string> = {
+function getFileTypeTagType(type: string): 'primary' | 'success' | 'warning' | 'info' | 'danger' {
+  const typeMap: Record<string, 'primary' | 'success' | 'warning' | 'info' | 'danger'> = {
     pdf: 'danger',
     image: 'success',
     video: 'warning',

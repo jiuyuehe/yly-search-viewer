@@ -50,10 +50,27 @@
                 </el-button>
               </el-upload>
             </el-card>
+            
+            <!-- AI Tools Navigation -->
+            <el-card header="AI 工具" style="margin-top: 20px;">
+              <el-menu
+                :default-active="activeAITool"
+                @select="handleAIToolSelect"
+              >
+                <el-menu-item index="template-manager">
+                  <el-icon><Setting /></el-icon>
+                  <span>模板管理</span>
+                </el-menu-item>
+                <el-menu-item index="extract-history">
+                  <el-icon><Clock /></el-icon>
+                  <span>抽取历史</span>
+                </el-menu-item>
+              </el-menu>
+            </el-card>
           </el-col>
           
           <!-- Preview Panel -->
-          <el-col :span="18">
+          <el-col :span="showAITools ? 12 : 18">
             <el-card>
               <template #header>
                 <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -81,6 +98,15 @@
                     >
                       工具栏
                     </el-button>
+                    <el-button
+                      size="small"
+                      :type="showAITools ? 'primary' : 'default'"
+                      @click="showAITools = !showAITools"
+                      style="margin-left: 8px;"
+                    >
+                      <el-icon><Robot /></el-icon>
+                      AI工具
+                    </el-button>
                   </div>
                 </div>
               </template>
@@ -95,6 +121,42 @@
                   @progress="handleFileProgress"
                 />
                 <el-empty v-else description="请选择一个文件进行预览" />
+              </div>
+            </el-card>
+          </el-col>
+          
+          <!-- AI Tools Panel -->
+          <el-col v-if="showAITools" :span="6">
+            <el-card v-if="selectedFile">
+              <template #header>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span>AI 工具</span>
+                  <el-button size="small" @click="showAITools = false">
+                    <el-icon><Close /></el-icon>
+                  </el-button>
+                </div>
+              </template>
+              <div style="height: 600px; overflow-y: auto;">
+                <AISidebar :file="selectedFile" />
+              </div>
+            </el-card>
+            
+            <!-- Standalone AI Tools -->
+            <el-card v-else-if="activeAITool === 'template-manager'">
+              <template #header>
+                <span>模板管理</span>
+              </template>
+              <div style="height: 600px; overflow-y: auto;">
+                <ExtractTemplateManager />
+              </div>
+            </el-card>
+            
+            <el-card v-else-if="activeAITool === 'extract-history'">
+              <template #header>
+                <span>抽取历史</span>
+              </template>
+              <div style="height: 600px; overflow-y: auto;">
+                <ExtractHistory />
               </div>
             </el-card>
           </el-col>
@@ -139,9 +201,14 @@ import {
   Upload,
   Cpu,
   HomeFilled,
-  Grid
+  Grid,
+  Cpu as Robot,
+  Setting,
+  Clock,
+  Close
 } from '@element-plus/icons-vue'
-import { FileViewer } from '../index'
+import { FileViewer, AISidebar, ExtractTemplateManager } from '../index'
+import ExtractHistory from '../components/ai/ExtractHistory.vue'
 import type { FileObject, FileViewerConfig } from '../types'
 import { createFileObject } from '../utils/file'
 
@@ -251,6 +318,8 @@ const config = ref<FileViewerConfig>({
 const progressVisible = ref(false)
 const progress = ref(0)
 const progressText = ref('')
+const showAITools = ref(false)
+const activeAITool = ref('')
 
 // Computed
 const selectedFile = computed(() => {
@@ -305,6 +374,11 @@ function handleFileProgress(loaded: number, total: number) {
     progress.value = Math.round((loaded / total) * 100)
     progressText.value = `已加载 ${Math.round(loaded / 1024)} KB / ${Math.round(total / 1024)} KB`
   }
+}
+
+function handleAIToolSelect(toolId: string) {
+  activeAITool.value = toolId
+  showAITools.value = true
 }</script>
 
 <style scoped>
