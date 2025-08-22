@@ -19,15 +19,7 @@ export default defineConfig(({ mode }) => {
       }),
       Components({
         resolvers: [ElementPlusResolver()]
-      }),
-      ...(isLib ? [
-        dts({
-          include: ['src/**/*'],
-          outDir: 'dist/types',
-          staticImport: true,
-          insertTypesEntry: true
-        })
-      ] : [])
+      })
     ],
     resolve: {
       alias: {

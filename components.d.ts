@@ -14,4 +14,7 @@ declare module 'vue' {
     TextPreview: typeof import('./src/components/preview/TextPreview.vue')['default']
     VideoPreview: typeof import('./src/components/preview/VideoPreview.vue')['default']
   }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
+  }
 }

@@ -96,11 +96,11 @@ import { validateFileObject } from '../../utils/file'
 import { themes } from '../../types'
 
 // Async component imports for code splitting
-const ImagePreview = defineAsyncComponent(() => import('./preview/ImagePreview.vue'))
-const PdfPreview = defineAsyncComponent(() => import('./preview/PdfPreview.vue'))
-const VideoPreview = defineAsyncComponent(() => import('./preview/VideoPreview.vue'))
-const OfficePreview = defineAsyncComponent(() => import('./preview/OfficePreview.vue'))
-const TextPreview = defineAsyncComponent(() => import('./preview/TextPreview.vue'))
+const ImagePreview = defineAsyncComponent(() => import('../preview/ImagePreview.vue'))
+const PdfPreview = defineAsyncComponent(() => import('../preview/PdfPreview.vue'))
+const VideoPreview = defineAsyncComponent(() => import('../preview/VideoPreview.vue'))
+const OfficePreview = defineAsyncComponent(() => import('../preview/OfficePreview.vue'))
+const TextPreview = defineAsyncComponent(() => import('../preview/TextPreview.vue'))
 
 interface Props {
   file: FileObject

@@ -1,4 +1,4 @@
-import { App } from 'vue'
+import type { App } from 'vue'
 import FileViewer from './components/core/FileViewer.vue'
 import ImagePreview from './components/preview/ImagePreview.vue'
 import PdfPreview from './components/preview/PdfPreview.vue'
