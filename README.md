@@ -110,6 +110,9 @@ const config = {
 | 视频 | MP4, WebM, M3U8 | 播放控制、倍速、字幕 |
 | Office | DOCX, XLSX, PPTX | 文档查看、缩放 |
 | 文本 | TXT, MD, JSON, JS | 语法高亮、搜索、编辑 |
+| xmind | xmind | 语法高亮、搜索、编辑 |
+| cad、DWG | dwg、dxf| 语法高亮、搜索、编辑 |
+| bin 3D | stld、obj 等等｜ 语法高亮、搜索、编辑 |
 
 ## 📋 原始需求
 
