@@ -156,7 +156,7 @@ const config = {
 
 ## 📄 许可证
 
-MIT License
+MIT License ｜ 版权与知识产权归深圳一粒云科技所有
 
 ## 🤝 贡献
 
