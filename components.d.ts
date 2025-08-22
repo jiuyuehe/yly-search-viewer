@@ -7,8 +7,12 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AISidebar: typeof import('./src/components/ai/AISidebar.vue')['default']
     BimPreview: typeof import('./src/components/preview/BimPreview.vue')['default']
     CadPreview: typeof import('./src/components/preview/CadPreview.vue')['default']
+    CustomExtract: typeof import('./src/components/ai/CustomExtract.vue')['default']
+    ExtractHistory: typeof import('./src/components/ai/ExtractHistory.vue')['default']
+    ExtractTemplateManager: typeof import('./src/components/ai/ExtractTemplateManager.vue')['default']
     FileViewer: typeof import('./src/components/core/FileViewer.vue')['default']
     ImagePreview: typeof import('./src/components/preview/ImagePreview.vue')['default']
     OfficePreview: typeof import('./src/components/preview/OfficePreview.vue')['default']
@@ -16,8 +20,5 @@ declare module 'vue' {
     TextPreview: typeof import('./src/components/preview/TextPreview.vue')['default']
     VideoPreview: typeof import('./src/components/preview/VideoPreview.vue')['default']
     XmindPreview: typeof import('./src/components/preview/XmindPreview.vue')['default']
-  }
-  export interface ComponentCustomProperties {
-    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

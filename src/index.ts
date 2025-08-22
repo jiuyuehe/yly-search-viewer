@@ -9,6 +9,12 @@ import XmindPreview from './components/preview/XmindPreview.vue'
 import BimPreview from './components/preview/BimPreview.vue'
 import CadPreview from './components/preview/CadPreview.vue'
 
+// AI Components
+import AISidebar from './components/ai/AISidebar.vue'
+import CustomExtract from './components/ai/CustomExtract.vue'
+import ExtractTemplateManager from './components/ai/ExtractTemplateManager.vue'
+import ExtractHistory from './components/ai/ExtractHistory.vue'
+
 // Export types
 export type {
   FileObject,
@@ -16,7 +22,13 @@ export type {
   PreviewerProps,
   PreviewerEmits,
   SupportedFileTypes,
-  ViewerTheme
+  ViewerTheme,
+  ExtractTemplate,
+  ExtractResult,
+  ExtractFieldSchema,
+  ExtractHistory as ExtractHistoryData,
+  AIService,
+  Entity
 } from './types'
 
 // Export utilities
@@ -29,6 +41,12 @@ export {
   isFileTypeSupported
 } from './utils/file'
 
+// Export AI services
+export { aiService } from './services/ai'
+
+// Export stores
+export { useExtractStore } from './stores/extract'
+
 // Export components
 export {
   FileViewer,
@@ -39,7 +57,11 @@ export {
   TextPreview,
   XmindPreview,
   BimPreview,
-  CadPreview
+  CadPreview,
+  AISidebar,
+  CustomExtract,
+  ExtractTemplateManager,
+  ExtractHistory
 }
 
 // Vue plugin
@@ -54,6 +76,10 @@ export default {
     app.component('XmindPreview', XmindPreview)
     app.component('BimPreview', BimPreview)
     app.component('CadPreview', CadPreview)
+    app.component('AISidebar', AISidebar)
+    app.component('CustomExtract', CustomExtract)
+    app.component('ExtractTemplateManager', ExtractTemplateManager)
+    app.component('ExtractHistory', ExtractHistory)
   }
 }
 
