@@ -25,6 +25,9 @@
                     <Picture v-else-if="file.type === 'image'" />
                     <VideoPlay v-else-if="file.type === 'video'" />
                     <OfficeBuilding v-else-if="file.type === 'office'" />
+                    <Cpu v-else-if="file.type === 'xmind'" />
+                    <HomeFilled v-else-if="file.type === 'bim'" />
+                    <Grid v-else-if="file.type === 'cad'" />
                     <EditPen v-else />
                   </el-icon>
                   <span>{{ file.meta?.title || file.url.split('/').pop() }}</span>
@@ -38,7 +41,7 @@
                 ref="uploadRef"
                 :auto-upload="false"
                 :show-file-list="false"
-                accept=".pdf,.jpg,.jpeg,.png,.gif,.mp4,.webm,.docx,.xlsx,.pptx,.txt,.md,.json"
+                accept=".pdf,.jpg,.jpeg,.png,.gif,.mp4,.webm,.docx,.xlsx,.pptx,.txt,.md,.json,.xmind,.ifc,.gltf,.glb,.dwg,.dxf"
                 @change="handleFileUpload"
               >
                 <el-button type="primary">
@@ -133,7 +136,10 @@ import {
   VideoPlay,
   OfficeBuilding,
   EditPen,
-  Upload
+  Upload,
+  Cpu,
+  HomeFilled,
+  Grid
 } from '@element-plus/icons-vue'
 import { FileViewer } from '../index'
 import type { FileObject, FileViewerConfig } from '../types'
@@ -201,6 +207,33 @@ const sampleFiles = ref<Array<FileObject & { id: string }>>([
     meta: {
       title: 'JSON 示例 - 配置文件',
       mimeType: 'application/json'
+    }
+  },
+  {
+    id: 'xmind-sample',
+    type: 'xmind',
+    url: 'data:application/octet-stream;base64,UEsDBBQAAAAIAAhHJ1QAAAAAAAAAAAAAAAAAVQA4AGRvY3VtZW50LnhtbFBLBwgAAAAAAAAAAAAAAwgAAA==',
+    meta: {
+      title: 'XMind 示例 - 思维导图',
+      mimeType: 'application/vnd.xmind.workbook'
+    }
+  },
+  {
+    id: 'bim-sample',
+    type: 'bim',
+    url: 'data:application/octet-stream;base64,Z2x0ZlNhbXBsZQ==',
+    meta: {
+      title: 'BIM 示例 - 建筑模型',
+      mimeType: 'model/gltf-binary'
+    }
+  },
+  {
+    id: 'cad-sample',
+    type: 'cad',
+    url: 'data:application/octet-stream;base64,QXV0b0NBRAQ=',
+    meta: {
+      title: 'CAD 示例 - 工程图纸',
+      mimeType: 'application/acad'
     }
   }
 ])

@@ -7,12 +7,15 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    BimPreview: typeof import('./src/components/preview/BimPreview.vue')['default']
+    CadPreview: typeof import('./src/components/preview/CadPreview.vue')['default']
     FileViewer: typeof import('./src/components/core/FileViewer.vue')['default']
     ImagePreview: typeof import('./src/components/preview/ImagePreview.vue')['default']
     OfficePreview: typeof import('./src/components/preview/OfficePreview.vue')['default']
     PdfPreview: typeof import('./src/components/preview/PdfPreview.vue')['default']
     TextPreview: typeof import('./src/components/preview/TextPreview.vue')['default']
     VideoPreview: typeof import('./src/components/preview/VideoPreview.vue')['default']
+    XmindPreview: typeof import('./src/components/preview/XmindPreview.vue')['default']
   }
   export interface ComponentCustomProperties {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']

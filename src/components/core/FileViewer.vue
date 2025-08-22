@@ -101,6 +101,9 @@ const PdfPreview = defineAsyncComponent(() => import('../preview/PdfPreview.vue'
 const VideoPreview = defineAsyncComponent(() => import('../preview/VideoPreview.vue'))
 const OfficePreview = defineAsyncComponent(() => import('../preview/OfficePreview.vue'))
 const TextPreview = defineAsyncComponent(() => import('../preview/TextPreview.vue'))
+const XmindPreview = defineAsyncComponent(() => import('../preview/XmindPreview.vue'))
+const BimPreview = defineAsyncComponent(() => import('../preview/BimPreview.vue'))
+const CadPreview = defineAsyncComponent(() => import('../preview/CadPreview.vue'))
 
 interface Props {
   file: FileObject
@@ -173,6 +176,12 @@ const previewComponent = computed(() => {
       return OfficePreview
     case 'text':
       return TextPreview
+    case 'xmind':
+      return XmindPreview
+    case 'bim':
+      return BimPreview
+    case 'cad':
+      return CadPreview
     default:
       return TextPreview // Fallback
   }
@@ -185,7 +194,10 @@ function getFileTypeTagType(type: string) {
     image: 'success',
     video: 'warning',
     office: 'info',
-    text: 'primary'
+    text: 'primary',
+    xmind: 'warning',
+    bim: 'success',
+    cad: 'danger'
   }
   return typeMap[type] || 'info'
 }

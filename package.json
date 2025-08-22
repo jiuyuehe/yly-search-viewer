@@ -41,16 +41,19 @@
   "author": "jiuyuehe",
   "license": "MIT",
   "dependencies": {
-    "vue": "^3.4.0",
-    "element-plus": "^2.4.0",
     "@element-plus/icons-vue": "^2.3.0",
-    "pinia": "^2.1.0",
-    "axios": "^1.6.0",
-    "pdfjs-dist": "^3.11.0",
+    "@types/three": "^0.179.0",
     "@vue-office/docx": "^1.4.0",
     "@vue-office/excel": "^1.7.0",
     "@vue-office/pdf": "^2.0.0",
-    "hls.js": "^1.4.0"
+    "axios": "^1.6.0",
+    "element-plus": "^2.4.0",
+    "hls.js": "^1.4.0",
+    "pdfjs-dist": "^3.11.0",
+    "pinia": "^2.1.0",
+    "three": "^0.179.1",
+    "vue": "^3.4.0",
+    "xmind-embed-viewer": "^1.2.0"
   },
   "devDependencies": {
     "@types/node": "^20.9.0",
