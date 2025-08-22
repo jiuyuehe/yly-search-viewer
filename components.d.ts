@@ -21,4 +21,7 @@ declare module 'vue' {
     VideoPreview: typeof import('./src/components/preview/VideoPreview.vue')['default']
     XmindPreview: typeof import('./src/components/preview/XmindPreview.vue')['default']
   }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
+  }
 }
