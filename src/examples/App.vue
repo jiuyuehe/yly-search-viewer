@@ -15,6 +15,14 @@
                 :default-active="selectedFileId"
                 @select="handleFileSelect"
               >
+                <!-- Translation Demo Item -->
+                <el-menu-item index="translation-demo">
+                  <el-icon><Position /></el-icon>
+                  <span>翻译模块演示</span>
+                </el-menu-item>
+                
+                <el-divider style="margin: 8px 0;" />
+                
                 <el-menu-item
                   v-for="file in sampleFiles"
                   :key="file.id"
@@ -86,15 +94,25 @@
               </template>
               
               <div style="height: 600px;">
+                <!-- Translation Demo -->
+                <TranslationEditor
+                  v-if="selectedFileId === 'translation-demo'"
+                  initial-text="欢迎使用YLY Search Viewer的翻译模块！这是一个功能完整的文本翻译系统，支持多种语言互译、术语管理、AI参数调节和翻译历史记录。"
+                  @translation-complete="handleTranslationComplete"
+                  @error="handleTranslationError"
+                />
+                
+                <!-- File Preview -->
                 <FileViewer
-                  v-if="selectedFile"
+                  v-else-if="selectedFile"
                   :file="selectedFile"
                   :config="config"
                   @load="handleFileLoad"
                   @error="handleFileError"
                   @progress="handleFileProgress"
                 />
-                <el-empty v-else description="请选择一个文件进行预览" />
+                
+                <el-empty v-else description="请选择一个文件进行预览或体验翻译功能" />
               </div>
             </el-card>
           </el-col>
@@ -121,6 +139,7 @@ import {
   ElCard,
   ElMenu,
   ElMenuItem,
+  ElDivider,
   ElIcon,
   ElButton,
   ElButtonGroup,
@@ -139,10 +158,11 @@ import {
   Upload,
   Cpu,
   HomeFilled,
-  Grid
+  Grid,
+  Position
 } from '@element-plus/icons-vue'
-import { FileViewer } from '../index'
-import type { FileObject, FileViewerConfig } from '../types'
+import { FileViewer, TranslationEditor } from '../index'
+import type { FileObject, FileViewerConfig, TranslationPair } from '../types'
 import { createFileObject } from '../utils/file'
 
 // Sample files for demo
@@ -305,6 +325,17 @@ function handleFileProgress(loaded: number, total: number) {
     progress.value = Math.round((loaded / total) * 100)
     progressText.value = `已加载 ${Math.round(loaded / 1024)} KB / ${Math.round(total / 1024)} KB`
   }
+}
+
+// Translation handlers
+function handleTranslationComplete(result: TranslationPair) {
+  ElMessage.success(`翻译完成：${result.sourceLang} → ${result.targetLang}`)
+  console.log('Translation completed:', result)
+}
+
+function handleTranslationError(error: string) {
+  ElMessage.error(`翻译失败: ${error}`)
+  console.error('Translation error:', error)
 }</script>
 
 <style scoped>

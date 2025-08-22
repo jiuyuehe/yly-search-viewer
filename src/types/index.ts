@@ -93,3 +93,64 @@ export const themes: Record<'light' | 'dark', ViewerTheme> = {
     shadow: 'rgba(255, 255, 255, 0.1)'
   }
 }
+
+// Translation related types
+export interface Language {
+  code: string
+  name: string
+  nativeName: string
+}
+
+export interface TranslationRecord {
+  id: string
+  sourceText: string
+  translatedText: string
+  sourceLang: string
+  targetLang: string
+  timestamp: Date
+  model?: string
+  score?: number
+}
+
+export interface TranslationSettings {
+  model: 'gpt-4' | 'deepl' | 'custom'
+  temperature: number
+  style: 'formal' | 'casual' | 'technical'
+  customApiUrl?: string
+  customApiKey?: string
+}
+
+export interface TranslationHistoryData {
+  records: TranslationRecord[]
+  maxRecords: number
+}
+
+export interface TerminologyEntry {
+  id: string
+  source: string
+  target: string
+  description?: string
+  category?: string
+}
+
+export interface TranslationHighlight {
+  start: number
+  end: number
+  type: 'word' | 'sentence' | 'paragraph'
+  matched?: boolean
+}
+
+export interface TranslationState {
+  sourceText: string
+  translatedText: string
+  sourceLang: string
+  targetLang: string
+  isTranslating: boolean
+  error: string | null
+  highlights: TranslationHighlight[]
+  characterCount: {
+    source: number
+    translated: number
+    ratio: number
+  }
+}

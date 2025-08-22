@@ -9,6 +9,15 @@ import XmindPreview from './components/preview/XmindPreview.vue'
 import BimPreview from './components/preview/BimPreview.vue'
 import CadPreview from './components/preview/CadPreview.vue'
 
+// Translation components
+import TranslationEditor from './components/text/TranslationEditor.vue'
+import TranslationPair from './components/text/TranslationPair.vue'
+import LanguageSelector from './components/text/LanguageSelector.vue'
+import TerminologyManager from './components/text/TerminologyManager.vue'
+import AISettingsPanel from './components/text/AISettingsPanel.vue'
+import TranslationHistory from './components/text/TranslationHistory.vue'
+import TranslationPanel from './components/ai/TranslationPanel.vue'
+
 // Export types
 export type {
   FileObject,
@@ -16,7 +25,14 @@ export type {
   PreviewerProps,
   PreviewerEmits,
   SupportedFileTypes,
-  ViewerTheme
+  ViewerTheme,
+  Language,
+  TranslationRecord,
+  TranslationSettings,
+  TranslationHistoryData,
+  TerminologyEntry,
+  TranslationHighlight,
+  TranslationState
 } from './types'
 
 // Export utilities
@@ -39,7 +55,14 @@ export {
   TextPreview,
   XmindPreview,
   BimPreview,
-  CadPreview
+  CadPreview,
+  TranslationEditor,
+  TranslationPair,
+  LanguageSelector,
+  TerminologyManager,
+  AISettingsPanel,
+  TranslationHistory,
+  TranslationPanel
 }
 
 // Vue plugin
@@ -54,6 +77,13 @@ export default {
     app.component('XmindPreview', XmindPreview)
     app.component('BimPreview', BimPreview)
     app.component('CadPreview', CadPreview)
+    app.component('TranslationEditor', TranslationEditor)
+    app.component('TranslationPair', TranslationPair)
+    app.component('LanguageSelector', LanguageSelector)
+    app.component('TerminologyManager', TerminologyManager)
+    app.component('AISettingsPanel', AISettingsPanel)
+    app.component('TranslationHistory', TranslationHistory)
+    app.component('TranslationPanel', TranslationPanel)
   }
 }
 
@@ -92,4 +122,33 @@ BimPreview.install = (app: App) => {
 
 CadPreview.install = (app: App) => {
   app.component('CadPreview', CadPreview)
+}
+
+// Translation component installs
+TranslationEditor.install = (app: App) => {
+  app.component('TranslationEditor', TranslationEditor)
+}
+
+TranslationPair.install = (app: App) => {
+  app.component('TranslationPair', TranslationPair)
+}
+
+LanguageSelector.install = (app: App) => {
+  app.component('LanguageSelector', LanguageSelector)
+}
+
+TerminologyManager.install = (app: App) => {
+  app.component('TerminologyManager', TerminologyManager)
+}
+
+AISettingsPanel.install = (app: App) => {
+  app.component('AISettingsPanel', AISettingsPanel)
+}
+
+TranslationHistory.install = (app: App) => {
+  app.component('TranslationHistory', TranslationHistory)
+}
+
+TranslationPanel.install = (app: App) => {
+  app.component('TranslationPanel', TranslationPanel)
 }

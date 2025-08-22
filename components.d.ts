@@ -7,13 +7,20 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AISettingsPanel: typeof import('./src/components/text/AISettingsPanel.vue')['default']
     BimPreview: typeof import('./src/components/preview/BimPreview.vue')['default']
     CadPreview: typeof import('./src/components/preview/CadPreview.vue')['default']
     FileViewer: typeof import('./src/components/core/FileViewer.vue')['default']
     ImagePreview: typeof import('./src/components/preview/ImagePreview.vue')['default']
+    LanguageSelector: typeof import('./src/components/text/LanguageSelector.vue')['default']
     OfficePreview: typeof import('./src/components/preview/OfficePreview.vue')['default']
     PdfPreview: typeof import('./src/components/preview/PdfPreview.vue')['default']
+    TerminologyManager: typeof import('./src/components/text/TerminologyManager.vue')['default']
     TextPreview: typeof import('./src/components/preview/TextPreview.vue')['default']
+    TranslationEditor: typeof import('./src/components/text/TranslationEditor.vue')['default']
+    TranslationHistory: typeof import('./src/components/text/TranslationHistory.vue')['default']
+    TranslationPair: typeof import('./src/components/text/TranslationPair.vue')['default']
+    TranslationPanel: typeof import('./src/components/ai/TranslationPanel.vue')['default']
     VideoPreview: typeof import('./src/components/preview/VideoPreview.vue')['default']
     XmindPreview: typeof import('./src/components/preview/XmindPreview.vue')['default']
   }
