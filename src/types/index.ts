@@ -137,6 +137,7 @@ export interface TranslationHighlight {
   start: number
   end: number
   type: 'word' | 'sentence' | 'paragraph'
+  target: 'source' | 'translated'
   matched?: boolean
 }
 

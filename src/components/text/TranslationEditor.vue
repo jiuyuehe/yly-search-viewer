@@ -55,7 +55,10 @@
 
     <!-- Loading Overlay -->
     <div v-if="translationState.isTranslating" class="translation-editor__loading">
-      <el-loading-service :target="'.translation-editor'" />
+      <div class="translation-editor__loading-content">
+        <el-icon class="is-loading"><Loading /></el-icon>
+        <span>翻译中...</span>
+      </div>
     </div>
 
     <!-- Action Bar -->
@@ -115,8 +118,8 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed, watch } from 'vue'
-import { ElMessage, ElLoading } from 'element-plus'
-import { Position, CopyDocument, StarFilled } from '@element-plus/icons-vue'
+import { ElMessage } from 'element-plus'
+import { Position, CopyDocument, StarFilled, Loading } from '@element-plus/icons-vue'
 import LanguageSelector from './LanguageSelector.vue'
 import TranslationPair from './TranslationPair.vue'
 import TerminologyManager from './TerminologyManager.vue'
@@ -125,8 +128,8 @@ import TranslationHistory from './TranslationHistory.vue'
 import type { 
   TranslationState, 
   TranslationSettings, 
-  TranslationHistory as THistory,
-  TranslationPair as TPair,
+  TranslationHistoryData as THistory,
+  TranslationRecord as TPair,
   TerminologyEntry 
 } from '../../types'
 
@@ -169,7 +172,7 @@ const translationState = reactive<TranslationState>({
 })
 
 // AI settings
-const aiSettings = reactive<TranslationSettings>({
+const aiSettings = ref<TranslationSettings>({
   model: 'gpt-4',
   temperature: 0.7,
   style: 'formal'
@@ -180,7 +183,7 @@ const terminology = ref<TerminologyEntry[]>([])
 const customRules = ref('')
 
 // Translation history
-const translationHistory = reactive<THistory>({
+const translationHistory = ref<THistory>({
   records: [],
   maxRecords: 50
 })
@@ -220,7 +223,7 @@ async function handleTranslate() {
       translationState.sourceText,
       translationState.sourceLang,
       translationState.targetLang,
-      aiSettings
+      aiSettings.value
     )
 
     translationState.translatedText = result.translatedText
@@ -234,7 +237,7 @@ async function handleTranslate() {
       sourceLang: translationState.sourceLang,
       targetLang: translationState.targetLang,
       timestamp: new Date(),
-      model: aiSettings.model,
+      model: aiSettings.value.model,
       score: result.score
     }
 
@@ -320,14 +323,14 @@ function handleSaveToHistory() {
     sourceLang: translationState.sourceLang,
     targetLang: translationState.targetLang,
     timestamp: new Date(),
-    model: aiSettings.model
+    model: aiSettings.value.model
   }
 
   // Add to history (keep only last maxRecords)
-  const updatedRecords = [record, ...translationHistory.records]
-    .slice(0, translationHistory.maxRecords)
+  const updatedRecords = [record, ...translationHistory.value.records]
+    .slice(0, translationHistory.value.maxRecords)
 
-  translationHistory.records = updatedRecords
+  translationHistory.value.records = updatedRecords
   ElMessage.success('已保存到翻译历史')
 }
 
@@ -451,7 +454,19 @@ updateCharacterCount()
   right: 0;
   bottom: 0;
   background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 1000;
+}
+
+.translation-editor__loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--el-color-primary);
 }
 
 /* Responsive design */

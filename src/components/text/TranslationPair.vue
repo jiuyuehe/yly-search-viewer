@@ -101,11 +101,11 @@ const charRatio = computed(() => {
 
 // Highlighted text with mark tags
 const highlightedSourceText = computed(() => {
-  return applyHighlights(sourceTextValue.value, props.highlights.filter(h => h.type === 'source'))
+  return applyHighlights(sourceTextValue.value, props.highlights.filter(h => h.target === 'source'))
 })
 
 const highlightedTranslatedText = computed(() => {
-  return applyHighlights(translatedTextValue.value, props.highlights.filter(h => h.type === 'translated'))
+  return applyHighlights(translatedTextValue.value, props.highlights.filter(h => h.target === 'translated'))
 })
 
 function applyHighlights(text: string, highlights: TranslationHighlight[]): string {

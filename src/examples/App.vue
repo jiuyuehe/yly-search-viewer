@@ -162,7 +162,7 @@ import {
   Position
 } from '@element-plus/icons-vue'
 import { FileViewer, TranslationEditor } from '../index'
-import type { FileObject, FileViewerConfig, TranslationPair } from '../types'
+import type { FileObject, FileViewerConfig, TranslationRecord } from '../types'
 import { createFileObject } from '../utils/file'
 
 // Sample files for demo
@@ -328,7 +328,7 @@ function handleFileProgress(loaded: number, total: number) {
 }
 
 // Translation handlers
-function handleTranslationComplete(result: TranslationPair) {
+function handleTranslationComplete(result: TranslationRecord) {
   ElMessage.success(`翻译完成：${result.sourceLang} → ${result.targetLang}`)
   console.log('Translation completed:', result)
 }

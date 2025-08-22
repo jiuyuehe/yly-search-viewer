@@ -112,15 +112,15 @@
 import { ref, computed, watch } from 'vue'
 import { ArrowRight, Download, Delete, CopyDocument } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import type { TranslationHistory, TranslationPair } from '../../types'
+import type { TranslationHistoryData, TranslationRecord } from '../../types'
 
 interface Props {
-  history?: TranslationHistory
+  history?: TranslationHistoryData
 }
 
 interface Emits {
-  (e: 'update:history', history: TranslationHistory): void
-  (e: 'load-record', record: TranslationPair): void
+  (e: 'update:history', history: TranslationHistoryData): void
+  (e: 'load-record', record: TranslationRecord): void
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -176,12 +176,12 @@ function truncateText(text: string, maxLength: number): string {
   return text.substring(0, maxLength) + '...'
 }
 
-function loadRecord(record: TranslationPair) {
+function loadRecord(record: TranslationRecord) {
   emit('load-record', record)
   ElMessage.success('已加载翻译记录')
 }
 
-function copyRecord(record: TranslationPair) {
+function copyRecord(record: TranslationRecord) {
   const text = `原文 (${record.sourceLang}): ${record.sourceText}\n译文 (${record.targetLang}): ${record.translatedText}`
   
   if (navigator.clipboard && window.isSecureContext) {
