@@ -5,6 +5,9 @@ import PdfPreview from './components/preview/PdfPreview.vue'
 import VideoPreview from './components/preview/VideoPreview.vue'
 import OfficePreview from './components/preview/OfficePreview.vue'
 import TextPreview from './components/preview/TextPreview.vue'
+import XmindPreview from './components/preview/XmindPreview.vue'
+import BimPreview from './components/preview/BimPreview.vue'
+import CadPreview from './components/preview/CadPreview.vue'
 
 // Export types
 export type {
@@ -33,7 +36,10 @@ export {
   PdfPreview,
   VideoPreview,
   OfficePreview,
-  TextPreview
+  TextPreview,
+  XmindPreview,
+  BimPreview,
+  CadPreview
 }
 
 // Vue plugin
@@ -45,6 +51,9 @@ export default {
     app.component('VideoPreview', VideoPreview)
     app.component('OfficePreview', OfficePreview)
     app.component('TextPreview', TextPreview)
+    app.component('XmindPreview', XmindPreview)
+    app.component('BimPreview', BimPreview)
+    app.component('CadPreview', CadPreview)
   }
 }
 
@@ -71,4 +80,16 @@ OfficePreview.install = (app: App) => {
 
 TextPreview.install = (app: App) => {
   app.component('TextPreview', TextPreview)
+}
+
+XmindPreview.install = (app: App) => {
+  app.component('XmindPreview', XmindPreview)
+}
+
+BimPreview.install = (app: App) => {
+  app.component('BimPreview', BimPreview)
+}
+
+CadPreview.install = (app: App) => {
+  app.component('CadPreview', CadPreview)
 }
